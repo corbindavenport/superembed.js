@@ -23,11 +23,11 @@ Then it will automatically resize any supported embedded videos. That's it.
 
 If you want to make an embedded video (or really any element) responsive, and it's not automatically detected by SuperEmbed, you can add the `.superembed-force` class to it like this:
 ```
-<iframe" src="http://www.example.com/video" class="superembed-force"></iframe>
+<iframe src="http://www.example.com/video" class="superembed-force"></iframe>
 ```
 You can also tell SuperEmbed to not resize a specific embed by adding the `.superembed-ignore` class, like this:
 ```
-<iframe" src="http://www.example.com/video" class="superembed-ignore"></iframe>
+<iframe src="http://www.example.com/video" class="superembed-ignore"></iframe>
 ```
 
 ---------------------------------------------------------
