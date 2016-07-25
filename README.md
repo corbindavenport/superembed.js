@@ -1,5 +1,7 @@
 SuperEmbed.js
 ================
+Live demo now available at [jsfiddle.net/gzsy52tm](https://jsfiddle.net/gzsy52tm/)
+---
 SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they strech to fill their container while still maintaining the original aspect ratio.
 
 There's a lot of existing libraries that do this, but I had issues or just didn't like all the ones I tried, so I made my own. And this is it.
@@ -21,7 +23,7 @@ Then it will automatically resize any supported embedded videos. That's it.
 
 **Advanced features**
 
-If you want to make an embedded video (or really any element) responsive, and it's not automatically detected by SuperEmbed, you can add the `.superembed-force` class to it like this:
+If you want to make an embedded video (or really any element) responsive and locked to a 16:9 ratio, but it's not automatically detected by SuperEmbed, you can add the `.superembed-force` class to it like this:
 ```
 <iframe src="http://www.example.com/video" class="superembed-force"></iframe>
 ```
