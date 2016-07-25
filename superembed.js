@@ -15,14 +15,18 @@ You should have received a copy of the GNU General Public License along with thi
 
 // Search for video embeds at page ready and modify them
 docReady(function() {
-	// Supports YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, and all other elements with superembed-force class
-	var embeds = document.body.querySelectorAll("iframe[src*='//www.youtube.com/embed'],iframe[src*='//player.vimeo.com/video'],iframe[src*='//www.kickstarter.com/projects'],iframe[src*='//players.brightcove.net/'],iframe[src*='//www.hulu.com/embed'],object[data*='//www.flickr.com/apps/video'],iframe[src*='//vine.co/v/'],iframe[src*='//videopress.com/embed'],iframe[src*='//www.dailymotion.com/embed'],.superembed-force");
+	// Supports YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Vid.Me, Twitch.tv, and all other elements with superembed-force class
+	var embeds = document.body.querySelectorAll("iframe[src*='//www.youtube.com/embed'],iframe[src*='//player.vimeo.com/video'],iframe[src*='//www.kickstarter.com/projects'],iframe[src*='//players.brightcove.net/'],iframe[src*='//www.hulu.com/embed'],object[data*='//www.flickr.com/apps/video'],iframe[src*='//vine.co/v/'],iframe[src*='//videopress.com/embed'],iframe[src*='//www.dailymotion.com/embed'],iframe[src*='//vid.me/e/'],iframe[src*='//player.twitch.tv/'],.superembed-force");
 
 	if (Modernizr.csscalc) {
 		// If calc() is supported, use that instead of injecting DIVs
 		[].forEach.call(embeds, function(iframe) {
 			if (!(iframe.classList.contains("superembed-ignore"))) {
-				iframe.setAttribute("style", "width: 100%; top: 5px; margin-bottom: -5px; height: calc(100vw*(9/16));");
+				if ((iframe.classList.contains("superembed-square")) || (iframe.url.contains("//vine.co/v/"))) {
+					iframe.setAttribute("style", "width: 100%; top: 5px; margin-bottom: -5px; height: calc(100vw*(4/4.25)); /* 4:3 */");
+				} else {
+					iframe.setAttribute("style", "width: 100%; top: 5px; margin-bottom: -5px; height: calc(100vw*(9/16)); /* 16:9 */");
+				}
 			}
 		});
 	} else {
@@ -32,7 +36,11 @@ docReady(function() {
 				// Add parent element
 				var parent = iframe.parentNode;
 				var wrapper = document.createElement('div');
-				wrapper.setAttribute("style", "position: relative; padding-bottom: 53%; /* 16:9 */ padding-top: 25px; height: 0;");
+				if ((iframe.classList.contains("superembed-square")) || (iframe.src.includes("//vine.co/v/"))) {
+					wrapper.setAttribute("style", "position: relative; padding-bottom: 95%; /* 4:3 */ padding-top: 25px; height: 0;");
+				} else {
+					wrapper.setAttribute("style", "position: relative; padding-bottom: 53%; /* 16:9 */ padding-top: 25px; height: 0;");
+				}
 				parent.replaceChild(wrapper, iframe);
 				wrapper.appendChild(iframe);
 				iframe.setAttribute("style", "position: absolute; top: 0; left: 0; width: 100%; height: 100%;");
