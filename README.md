@@ -8,10 +8,10 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 
 **Features**
 * Works without external libraries like JQuery
-* Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, and DailyMotion embedded videos
+* Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Twitch.tv, and Vid.me embedded videos
 * Responsive layout can be forced or blocked with classes applied to the embed code
 * Uses CSS `calc()` property if the browser supports it, so no messy injected DIV tags
-* Extremely tiny, the minified version is only 3.3KB
+* Extremely tiny, the minified version is only 3.7KB
 
 **How to use**
 
@@ -31,8 +31,17 @@ You can also tell SuperEmbed to not resize a specific embed by adding the `.supe
 ```
 <iframe src="http://www.example.com/video" class="superembed-ignore"></iframe>
 ```
+And finally, you can force a 4:3 aspect ratio by adding the `.superembed-square` class, like this:
+```
+<iframe src="http://www.example.com/video" class="superembed-square"></iframe>
+```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 1.1:__
+* Added support for Vid.me and Twitch.tv
+* Vine embeds are now automatically 4:3 instead of 16:9
+* You can now add the `.superembed-square` class to force an embed to 4:3 ratio
+
 __New in SuperEmbed.js 1.0:__
 * Initial release
 
