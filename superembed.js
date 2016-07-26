@@ -22,7 +22,7 @@ docReady(function() {
 		// If calc() is supported, use that instead of injecting DIVs
 		[].forEach.call(embeds, function(iframe) {
 			if (!(iframe.classList.contains("superembed-ignore"))) {
-				if ((iframe.classList.contains("superembed-square")) || (iframe.url.contains("//vine.co/v/"))) {
+				if ((iframe.classList.contains("superembed-square")) || (iframe.src.includes("//vine.co/v/"))) {
 					iframe.setAttribute("style", "width: 100%; top: 5px; margin-bottom: -5px; height: calc(100vw*(4/4.25)); /* 4:3 */");
 				} else {
 					iframe.setAttribute("style", "width: 100%; top: 5px; margin-bottom: -5px; height: calc(100vw*(9/16)); /* 16:9 */");
