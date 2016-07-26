@@ -37,6 +37,9 @@ And finally, you can force a 4:3 aspect ratio by adding the `.superembed-square`
 ```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 1.2:__
+* Fixed issue with undefined error
+
 __New in SuperEmbed.js 1.1:__
 * Added support for Vid.me and Twitch.tv
 * Vine embeds are now automatically 4:3 instead of 16:9
