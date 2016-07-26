@@ -10,7 +10,7 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 * Works without external libraries like JQuery
 * Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Twitch.tv, and Vid.me embedded videos
 * Responsive layout can be forced or blocked with classes applied to the embed code
-* Uses CSS `calc()` property if the browser supports it, so no messy injected DIV tags
+* Built-in [Modernizr](https://modernizr.com/) feature detection for CSS `calc()`, with fallback to older responsive layout method
 * Extremely tiny, the minified version is only 3.7KB
 
 **How to use**
