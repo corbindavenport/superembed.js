@@ -1,6 +1,6 @@
 SuperEmbed.js
 ================
-Live demo now available at [jsfiddle.net/cuzv5xbo/](https://jsfiddle.net/cuzv5xbo/)
+Live demo now available at [jsfiddle.net/8w7Lhtyt](https://jsfiddle.net/8w7Lhtyt/)
 ---
 SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they strech to fill their container while still maintaining the original aspect ratio.
 
@@ -10,8 +10,7 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 * Works without external libraries like JQuery
 * Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Twitch.tv, and Vid.me embedded videos
 * Responsive layout can be forced or blocked with classes applied to the embed code
-* Built-in [Modernizr](https://modernizr.com/) feature detection for CSS `calc()`, with fallback to older responsive layout method
-* Extremely tiny, the minified version is only 3.7KB
+* Extremely tiny, the minified version is only 1.65KB
 
 **How to use**
 
@@ -37,6 +36,9 @@ And finally, you can force a 4:3 aspect ratio by adding the `.superembed-square`
 ```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 1.3:__
+* Removed optional CSS `calc()` due to not working correctly
+
 __New in SuperEmbed.js 1.2:__
 * Fixed issue with undefined error
 
