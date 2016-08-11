@@ -1,6 +1,6 @@
 SuperEmbed.js
 ================
-Live demo now available at [jsfiddle.net/8w7Lhtyt](https://jsfiddle.net/8w7Lhtyt/)
+Live demo now available at [jsfiddle.net/h6x04LuL](https://jsfiddle.net/h6x04LuL/)
 ---
 SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they strech to fill their container while still maintaining the original aspect ratio.
 
@@ -9,8 +9,11 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 **Features**
 * Works without external libraries like JQuery
 * Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Twitch.tv, and Vid.me embedded videos
+* Responsive videos maintain their original aspect ratio
 * Responsive layout can be forced or blocked with classes applied to the embed code
-* Extremely tiny, the minified version is only 1.65KB
+* Extremely tiny, the minified version is only 1.29 KB
+
+*Note: SuperEmbed.js does not work on Internet Explorer 8 and below.*
 
 **How to use**
 
@@ -22,7 +25,7 @@ Then it will automatically resize any supported embedded videos. That's it.
 
 **Advanced features**
 
-If you want to make an embedded video (or really any element) responsive and locked to a 16:9 ratio, but it's not automatically detected by SuperEmbed, you can add the `.superembed-force` class to it like this:
+If you want to make an embedded video (or really any element) responsive, but it's not automatically detected by SuperEmbed, you can add the `.superembed-force` class to it like this:
 ```
 <iframe src="http://www.example.com/video" class="superembed-force"></iframe>
 ```
@@ -30,12 +33,18 @@ You can also tell SuperEmbed to not resize a specific embed by adding the `.supe
 ```
 <iframe src="http://www.example.com/video" class="superembed-ignore"></iframe>
 ```
-And finally, you can force a 4:3 aspect ratio by adding the `.superembed-square` class, like this:
+And finally, you can force a 1:1 aspect ratio by adding the `.superembed-square` class, like this:
 ```
 <iframe src="http://www.example.com/video" class="superembed-square"></iframe>
 ```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 2.0:__
+* Almost completely re-written, resizing is now handled by JS instead of CSS
+* Now videos maintain their original aspect ratio when resized, no more letterboxing
+* Minimum Internet Explorer version dropped to IE 9
+* The `.superembed-square` class now applies a 1:1 ratio, instead of a 4:3 ratio
+
 __New in SuperEmbed.js 1.3:__
 * Removed optional CSS `calc()` due to not working correctly
 
