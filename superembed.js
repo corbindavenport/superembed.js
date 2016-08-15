@@ -53,5 +53,13 @@ function resizeVids() {
 }
 
 // Resize videos on page load and after window is resized
-window.addEventListener("DOMContentLoaded", resizeVids);
-window.addEventListener("resize", resizeVids);
+
+// If JQuery is loaded, it uses JQuery's browser events for higher browser compatibility
+// Otherwise, the DOMContentLoaded event listener is used
+if (window.jQuery) {
+	$(document).ready(function() {resizeVids();});
+	$(window).resize(function() {resizeVids();});
+} else {
+	window.addEventListener("DOMContentLoaded", resizeVids);
+	window.addEventListener("resize", resizeVids);
+}
