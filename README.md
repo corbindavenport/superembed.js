@@ -13,7 +13,11 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 * Responsive layout can be forced or blocked with classes applied to the embed code
 * Extremely tiny, the minified version is only 1.29 KB
 
-*Note: SuperEmbed.js does not work on Internet Explorer 8 and below.*
+**Browser support**
+
+| Chrome | Internet Explorer | Firefox | Safari | Opera |
+| :-----:| :-----:| :-----:| :-----:| :-----:|
+| 4.0+ | 9.0+ | 3.5+ | 3.2+ | 10+ |
 
 **How to use**
 
@@ -22,6 +26,8 @@ You can put the SuperEmbed script wherever you want on the page:
 <script src="superembed.min.js"></script>
 ```
 Then it will automatically resize any supported embedded videos. That's it.
+
+*Note: If you already use JQuery, and you load SuperEmbed sometime after it, it will use JQuery to detect when the page is loaded and the window is resized (instead of DOM JavaScript).*
 
 **Advanced features**
 
@@ -39,25 +45,14 @@ And finally, you can force a 1:1 aspect ratio by adding the `.superembed-square`
 ```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 2.1:__
+* Now optionally uses JQuery for detecting page load and page resize, if JQuery is loaded before SuperEmbed
+
 __New in SuperEmbed.js 2.0:__
 * Almost completely re-written, resizing is now handled by JS instead of CSS
 * Now videos maintain their original aspect ratio when resized, no more letterboxing
 * Minimum Internet Explorer version dropped to IE 9
 * The `.superembed-square` class now applies a 1:1 ratio, instead of a 4:3 ratio
-
-__New in SuperEmbed.js 1.3:__
-* Removed optional CSS `calc()` due to not working correctly
-
-__New in SuperEmbed.js 1.2:__
-* Fixed issue with undefined error
-
-__New in SuperEmbed.js 1.1:__
-* Added support for Vid.me and Twitch.tv
-* Vine embeds are now automatically 4:3 instead of 16:9
-* You can now add the `.superembed-square` class to force an embed to 4:3 ratio
-
-__New in SuperEmbed.js 1.0:__
-* Initial release
 
 ---------------------------------------------------------
 
