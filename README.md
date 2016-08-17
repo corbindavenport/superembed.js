@@ -11,7 +11,7 @@ There's a lot of existing libraries that do this, but I had issues or just didn'
 * Works automatically with YouTube, Vimeo, Kickstarter, CollegeHumor, Hulu, Flickr, Vine, VideoPress, DailyMotion, Twitch.tv, and Vid.me embedded videos
 * Responsive videos maintain their original aspect ratio
 * Responsive layout can be forced or blocked with classes applied to the embed code
-* Extremely tiny, the minified version is only 1.29 KB
+* Extremely tiny, the minified version is only 1.4 KB
 
 **Browser support**
 
@@ -45,6 +45,9 @@ And finally, you can force a 1:1 aspect ratio by adding the `.superembed-square`
 ```
 
 ---------------------------------------------------------
+__New in SuperEmbed.js 2.2:__
+* Fixes to avoid conflict with other libraries
+
 __New in SuperEmbed.js 2.1:__
 * Now optionally uses JQuery for detecting page load and page resize, if JQuery is loaded before SuperEmbed
 
