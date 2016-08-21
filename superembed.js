@@ -27,8 +27,16 @@ function resizeVids() {
 				}
 			}
 			// Resizing code based on http://stackoverflow.com/a/3971875
-			var maxWidth = iframe.parentElement.offsetWidth; // Width of parent container
-			var maxHeight = document.body.clientHeight; // Height of page
+			// Get width and height of parent container
+			if (window.getComputedStyle) {
+				var maxWidth = window.getComputedStyle(iframe.parentElement,null).getPropertyValue("width");
+				var maxHeight = window.getComputedStyle(document.body,null).getPropertyValue("height");
+				maxWidth = maxWidth.substring(0, maxWidth.length - 2);
+				maxHeight = maxHeight.substring(0, maxHeight.length - 2);
+			} else {
+				var maxWidth = iframe.parentElement.offsetWidth;
+				var maxHeight = document.body.clientHeight;
+			}
 			var ratio = 0; // Used for aspect ratio
 			var width = iframe.getAttribute("data-width"); // Original video width
 			var height = iframe.getAttribute("data-height"); // Original video height
@@ -53,9 +61,6 @@ function resizeVids() {
 }
 
 // Resize videos on page load and after window is resized
-
-// If JQuery is loaded, it uses JQuery's browser events for higher browser compatibility
-// Otherwise, the DOMContentLoaded event listener is used
 if (window.jQuery) {
 	jQuery(document).ready(function() {resizeVids();});
 	jQuery(window).resize(function() {resizeVids();});
