@@ -1,0 +1,21 @@
+{
+  "name": "superembed.js",
+  "version": "2.2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "superembed",
+    "responsive",
+    "video"
+  ],
+  "license": "MIT",
+  "author": "corbindavenport",
+  "main": [
+    "./superembed.js"
+  ]
+}
