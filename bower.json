@@ -1,6 +1,6 @@
 {
   "name": "superembed.js",
-  "version": "2.2",
+  "version": "2.3",
   "ignore": [
     "**/.*",
     "node_modules",
