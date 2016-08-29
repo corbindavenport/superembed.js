@@ -2,7 +2,7 @@ SuperEmbed.js
 ================
 Live demo now available at [jsfiddle.net/h6x04LuL](https://jsfiddle.net/h6x04LuL/)
 ---
-SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they strech to fill their container while still maintaining the original aspect ratio.
+SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they stretch to fill their container while still maintaining the original aspect ratio.
 
 There's a lot of existing libraries that do this, but I had issues or just didn't like all the ones I tried, so I made my own. And this is it.
 
