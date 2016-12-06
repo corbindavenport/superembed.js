@@ -128,14 +128,14 @@
       'videopress.com/embed',
       'www.dailymotion.com/embed',
       'vid.me/e',
-      'player.twitch.tv',
+      'player.twitch.tv'
     ],
     // object[data*="//www.flickr.com/apps/video"]
     object: [
       'www.flickr.com/apps/video'
     ],
     css: [
-      '.superembed-force',
+      '.superembed-force'
     ]
   };
 
