@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta http-equiv="x-ua-compatible" content="IE=Edge"/> 
 	<title>SuperEmbed.js test</title>
 	<script src="superembed.js" type="text/javascript"></script>
 	<style type="text/css">
@@ -8,26 +10,32 @@
 			font-family: Arial;
 			margin: 0;
 			padding: 0;
+			width: 100%;
 		}
-		main {
+		.main {
+			width: 100%;
 			max-width: 600px;
 			margin: 0 auto;
 			background: #FFFFFF;
 			border-left: 1px solid #000;
 			border-right: 1px solid #000;
 			padding:10px;
+			display: block;
 		}
 	</style>
 </head>
 <body>
-	<main>
+	<div class="main">
 		<h1>SuperEmbed.js Demo</h1>
 		<p>This is an unmodified YouTube embed code, with SuperEmbed.js loaded. Resize the page to see it shrink.</p>
+		<!--[if lt IE 9]>
+		<p><i>SuperEmbed.js is not supported on anything lower than IE9.</i></p>
+		<![endif]-->
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/IXxZRZxafEQ" frameborder="0" allowfullscreen></iframe>
 		<p>Here is a Vimeo embedded video:</p>
-		<iframe src="https://player.vimeo.com/video/138174318" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		<iframe src="https://player.vimeo.com/video/138174318" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		<p>Ignored Video ("superembed-ignore" class added):</p>
 		<iframe class="superembed-ignore" width="560" height="315" src="https://www.youtube.com/embed/IXxZRZxafEQ" frameborder="0" allowfullscreen></iframe>
-	</main>
+	</div>
 </body>
 </html>
