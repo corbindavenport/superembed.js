@@ -1,10 +1,10 @@
 SuperEmbed.js
 ================
-Live demo now available at [jsfiddle.net/h6x04LuL](https://jsfiddle.net/h6x04LuL/)
+Live demo now available at [jsfiddle.net/raf5mpo2/](https://jsfiddle.net/raf5mpo2/)
 ---
-SuperEmbed.js detects YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more embedded videos on webpages and makes them responsive. Essentially, this means they stretch to fill their container while still maintaining the original aspect ratio.
+SuperEmbed.js detects embedded videos from YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more on webpages and makes them responsive. Essentially, this means they stretch to fill their container while still maintaining the content's original aspect ratio.
 
-There's a lot of existing libraries that do this, but I had issues or just didn't like all the ones I tried, so I made my own. And this is it.
+I created SuperEmbed to fix all my issues with existing solutions, including (but not limited to) unnecessary reliance on other libraries, bloated code, and poor fallback support.
 
 **Features**
 * Works without external libraries like JQuery
@@ -27,7 +27,7 @@ You can put the SuperEmbed script wherever you want on the page:
 ```
 Then it will automatically resize any supported embedded videos. That's it.
 
-*Note: If you already use JQuery, and you load SuperEmbed sometime after it, it will use JQuery to detect when the page is loaded and the window is resized (instead of DOM JavaScript).*
+*Note: If you already use JQuery, and you load SuperEmbed sometime after it, SuperEmbed will use JQuery to detect when the page is loaded and the window is resized (instead of DOM JavaScript).*
 
 **Advanced features**
 
@@ -45,6 +45,9 @@ And finally, you can force a 1:1 aspect ratio by adding the `.superembed-square`
 ```
 
 ---------------------------------------------------------
+
+__New in SuperEmbed.js 3.0:__
+* Improved performance and cleaner code
 
 __New in SuperEmbed.js 2.3:__
 * Now uses getComputedStyle to calculate width and height on supported browsers
