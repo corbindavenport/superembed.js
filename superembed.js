@@ -1,70 +1,153 @@
-/*
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+/**
+ * SuperEmbed.js
+ */
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+;(function() {
+  /**
+   * @returns {HTMLIFrameElement[]}
+   */
+  var getElements = function() {
+    var selectors = [];
 
-You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
-*/
+    for (var type in superEmbed.services) {
+      var start = '';
+      var end = '';
 
-// Search for video embeds and modify them
-function resizeVids() {
-	var embeds = document.body.querySelectorAll("iframe[src*='//www.youtube.com/embed'],iframe[src*='//player.vimeo.com/video'],iframe[src*='//www.kickstarter.com/projects'],iframe[src*='//players.brightcove.net/'],iframe[src*='//www.hulu.com/embed'],object[data*='//www.flickr.com/apps/video'],iframe[src*='//vine.co/v/'],iframe[src*='//videopress.com/embed'],iframe[src*='//www.dailymotion.com/embed'],iframe[src*='//vid.me/e/'],iframe[src*='//player.twitch.tv/'],.superembed-force");
+      switch (type) {
+        case 'iframe':
+          start = type + '[src*="//';
+          end = '"]';
+          break;
 
-	[].forEach.call(embeds, function(iframe) {
-		if (!(iframe.classList.contains("superembed-ignore"))) {
-			// Original aspect ratio is kept in data attribute to maintain scaling
-			if (!(iframe.hasAttribute("data-width"))) {
-				if (iframe.classList.contains("superembed-square")) {
-					iframe.setAttribute("data-width", "1");
-					iframe.setAttribute("data-height", "1");
-				} else if ((iframe.hasAttribute("width")) && (iframe.hasAttribute("height"))) {
-					iframe.setAttribute("data-width", iframe.offsetWidth);
-					iframe.setAttribute("data-height", iframe.offsetHeight);
-				} else {
-					// Use 16:9 ratio if element doesn't have specified width and height
-					iframe.setAttribute("data-width", "16");
-					iframe.setAttribute("data-height", "9");
-				}
-			}
-			// Resizing code based on http://stackoverflow.com/a/3971875
-			// Get width and height of parent container
-			if (window.getComputedStyle) {
-				var maxWidth = window.getComputedStyle(iframe.parentElement,null).getPropertyValue("width");
-				var maxHeight = window.getComputedStyle(document.body,null).getPropertyValue("height");
-				maxWidth = maxWidth.substring(0, maxWidth.length - 2);
-				maxHeight = maxHeight.substring(0, maxHeight.length - 2);
-			} else {
-				var maxWidth = iframe.parentElement.offsetWidth;
-				var maxHeight = document.body.clientHeight;
-			}
-			var ratio = 0; // Used for aspect ratio
-			var width = iframe.getAttribute("data-width"); // Original video width
-			var height = iframe.getAttribute("data-height"); // Original video height
-			// Check if the current width is larger than the max
-			if (width != maxWidth) {
-				ratio = maxWidth / width; // get ratio for scaling video
-				iframe.setAttribute("width", maxWidth);
-				iframe.setAttribute("height", height * ratio);
-				height = height * ratio; // Reset height to match scaled video
-				width = width * ratio; // Reset width to match scaled video
-			}
-			// Check if current height is larger than max
-			if (height > maxHeight) {
-				ratio = maxHeight / height; // Get ratio for scaling video
-				iframe.setAttribute("height", maxHeight);
-				iframe.setAttribute("width", width * ratio);
-				width = width * ratio; // Reset width to match scaled video
-				height = height * ratio; // Reset height to match scaled video
-			}
-		}
-	});
-}
+        case 'object':
+          start = type + '[data*="//';
+          end = '"]';
+          break;
+      }
 
-// Resize videos on page load and after window is resized
+      selectors.push(start + superEmbed.services[type].join(end + ',' + start) + end);
+    }
+
+    // Transform NodeList object into plain array.
+    // @see http://stackoverflow.com/a/6545450
+    return [].slice.call(document.body.querySelectorAll(selectors.join(',')));
+  };
+
+  /**
+   * Execute this function when DOM is ready for manipulations.
+   *
+   * @returns {Function}
+   *   Callback to keep video sizes updated.
+   */
+  var superEmbed = function() {
+    var elements = getElements();
+
+    elements.forEach(function(iframe, index) {
+      // Remove ignored videos from a list of elements which will be processed
+      // on every resizing. This reduce checks that class list contains needed.
+      iframe.classList.contains('superembed-ignore') && elements.splice(index);
+    });
+
+    // Execute logic once and return the function to do the same whenever needed.
+    return (function resize() {
+      elements.forEach(function(iframe) {
+        var ratio = 0;
+        var width = 0;
+        var height = 0;
+        var maxWidth = 0;
+        var maxHeight = 0;
+        var needsUpdate = false;
+
+        // Original aspect ratio is kept in data attribute to maintain scaling.
+        if (iframe.hasAttribute('data-width')) {
+          width = iframe.getAttribute('data-width');
+          height = iframe.getAttribute('data-height');
+        }
+        else {
+          if (iframe.classList.contains('superembed-square')) {
+            width = 1;
+            height = 1;
+          } else if (iframe.hasAttribute('width')) {
+            width = iframe.offsetWidth;
+            height = iframe.offsetHeight;
+          } else {
+            // Use 16:9 ratio if element doesn't have specified width and height.
+            width = 16;
+            height = 9;
+          }
+
+          iframe.setAttribute('data-width', width);
+          iframe.setAttribute('data-height', height);
+        }
+
+        // Get width and height of parent container.
+        // @see http://stackoverflow.com/a/3971875
+        if (window.getComputedStyle) {
+          maxWidth = parseInt(window.getComputedStyle(iframe.parentElement, null).getPropertyValue('width'));
+          maxHeight = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('height'));
+        } else {
+          maxWidth = iframe.parentElement.offsetWidth;
+          maxHeight = document.body.clientHeight;
+        }
+
+        if (width > maxWidth) {
+          ratio = maxWidth / width;
+          maxHeight = height * ratio;
+          needsUpdate = true;
+        }
+
+        if (height > maxHeight) {
+          ratio = maxHeight / height;
+          maxWidth = width * ratio;
+          needsUpdate = true;
+        }
+
+        if (needsUpdate) {
+          iframe.setAttribute('width', maxWidth);
+          iframe.setAttribute('height', maxHeight);
+
+          // Reset width and height to match scaled video.
+          width *= ratio;
+          height *= ratio;
+        }
+      });
+
+      return resize;
+    })();
+  };
+
+  superEmbed.services = {
+    // iframe[src*="//www.youtube.com/embed"]
+    iframe: [
+      'www.youtube.com/embed',
+      'player.vimeo.com/video',
+      'www.kickstarter.com/projects',
+      'players.brightcove.net',
+      'www.hulu.com/embed',
+      'vine.co/v',
+      'videopress.com/embed',
+      'www.dailymotion.com/embed',
+      'vid.me/e',
+      'player.twitch.tv'
+    ],
+    // object[data*="//www.flickr.com/apps/video"]
+    object: [
+      'www.flickr.com/apps/video'
+    ],
+    css: [
+      '.superembed-force'
+    ]
+  };
+
+  window.superEmbed = superEmbed;
+})();
+
 if (window.jQuery) {
-	jQuery(document).ready(function() {resizeVids();});
-	jQuery(window).resize(function() {resizeVids();});
+  jQuery(document).ready(function() {
+    jQuery(window).resize(superEmbed());
+  });
 } else {
-	window.addEventListener("DOMContentLoaded", resizeVids);
-	window.addEventListener("resize", resizeVids);
+  window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('resize', superEmbed())
+  });
 }
