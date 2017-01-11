@@ -1,6 +1,6 @@
 SuperEmbed.js
 ================
-Live demo now available [here](corbindavenport.github.io/superembed.js).
+Live demo now available [here](https://corbindavenport.github.io/superembed.js).
 ---
 SuperEmbed.js detects embedded videos from YouTube, Vimeo, Vine, VideoPress, DailyMotion, and more on webpages and makes them responsive. Essentially, this means they stretch to fill their container while still maintaining the content's original aspect ratio.
 
