@@ -1,7 +1,6 @@
 /**
  * SuperEmbed.js
  */
-
 ;(function() {
   /**
    * @returns {HTMLIFrameElement[]}
@@ -58,12 +57,21 @@
         var maxHeight = 0;
         var needsUpdate = false;
 
+        // If responsive Gfycat embed, strip existing responsive code
+        if ((iframe.getAttribute('style') === "position:absolute;top:0;left:0;") && (iframe.src.includes("gfycat.com/ifr/")) && (!(iframe.getAttribute('data-width')))) {
+          // Remove existing responsive code
+          iframe.setAttribute('style', '');
+          iframe.parentElement.setAttribute('style', '');
+          // Set 16:9 ratio
+          iframe.setAttribute('data-width', '16');
+          iframe.setAttribute('data-height', '9');
+        }
+
         // Original aspect ratio is kept in data attribute to maintain scaling.
         if (iframe.hasAttribute('data-width')) {
           width = iframe.getAttribute('data-width');
           height = iframe.getAttribute('data-height');
-        }
-        else {
+        } else {
           if (iframe.classList.contains('superembed-square')) {
             width = 1;
             height = 1;
@@ -90,7 +98,7 @@
           maxHeight = document.body.clientHeight;
         }
 
-        if (width > maxWidth) {
+        if (width != maxWidth) {
           ratio = maxWidth / width;
           maxHeight = height * ratio;
           needsUpdate = true;
@@ -128,7 +136,12 @@
       'videopress.com/embed',
       'www.dailymotion.com/embed',
       'vid.me/e',
-      'player.twitch.tv'
+      'player.twitch.tv',
+      'facebook.com/plugins/video.php',
+      'gfycat.com/ifr/',
+      'liveleak.com/ll_embed',
+      'media.myspace.com',
+      'archive.org/embed'
     ],
     // object[data*="//www.flickr.com/apps/video"]
     object: [
