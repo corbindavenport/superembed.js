@@ -27,9 +27,13 @@
       selectors.push(start + superEmbed.services[type].join(end + ',' + start) + end);
     }
 
-    // Transform NodeList object into plain array.
-    // @see http://stackoverflow.com/a/6545450
-    return [].slice.call(document.body.querySelectorAll(selectors.join(',')));
+    if (!(document.querySelectorAll("div") instanceof Object)) { // For IE8, because it can't handle using slice on NodeList
+      return document.body.querySelectorAll(selectors.join(','));
+    } else { // For other browsers
+      // Transform NodeList object into plain array.
+      // @see http://stackoverflow.com/a/6545450
+      return [].slice.call(document.body.querySelectorAll(selectors.join(',')));
+    }
   };
 
   /**
@@ -159,8 +163,12 @@ if (window.jQuery) {
   jQuery(document).ready(function() {
     jQuery(window).resize(superEmbed());
   });
-} else {
+} else if (window.addEventListener) {
   window.addEventListener('DOMContentLoaded', function() {
-    window.addEventListener('resize', superEmbed())
+    window.addEventListener('resize', superEmbed());
   });
+} else {
+  window.onload = function() {
+    window.attachEvent('onresize', superEmbed());
+  }
 }
