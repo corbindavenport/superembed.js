@@ -36,7 +36,9 @@ Embeded videos from the following sites are supported:
 
 | Chrome | Internet Explorer | Firefox | Safari | Opera |
 | :-----:| :-----:| :-----:| :-----:| :-----:|
-| 4.0+ | 9.0+ | 3.5+ | 3.2+ | 10+ |
+| 4.0+ | 9.0+ (see note) | 3.5+ | 3.2+ | 10+ |
+
+*IE9 compatibility requires [classList.js](https://github.com/eligrey/classList.js), included in the 'extras' folder, to be loaded before SuperEmbed.js. This is not needed for IE10 and up.*
 
 **How to use**
 
