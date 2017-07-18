@@ -27,13 +27,9 @@
       selectors.push(start + superEmbed.services[type].join(end + ',' + start) + end);
     }
 
-    if (!(document.querySelectorAll("div") instanceof Object)) { // For IE8, because it can't handle using slice on NodeList
-      return document.body.querySelectorAll(selectors.join(','));
-    } else { // For other browsers
-      // Transform NodeList object into plain array.
-      // @see http://stackoverflow.com/a/6545450
-      return [].slice.call(document.body.querySelectorAll(selectors.join(',')));
-    }
+    // Transform NodeList object into plain array.
+    // @see http://stackoverflow.com/a/6545450
+    return [].slice.call(document.body.querySelectorAll(selectors.join(',')));
   };
 
   /**
@@ -71,6 +67,23 @@
           iframe.setAttribute('data-height', '9');
         }
 
+        // SoundCloud has two embed types, a "Visual Embed" that shows the full album art, and a "Classic Embed" that is not as tall
+        // SuperEmbed will force the visual embed to be square, and leave alone the classic embed (besides making sure width is set to 100%)
+        if ((iframe.getAttribute('src').indexOf('w.soundcloud.com') != -1) && (!(iframe.getAttribute('data-width')))) {
+          // Remove existing responsive code
+          iframe.setAttribute('width', '');
+          iframe.setAttribute('height', '');
+          if (iframe.getAttribute('src').indexOf('visual=true') != -1) {
+            // Visual embed
+            iframe.setAttribute('data-width', '1');
+            iframe.setAttribute('data-height', '1');
+          } else {
+            // Classic Embed
+            iframe.setAttribute('data-width', '10');
+            iframe.setAttribute('data-height', '4');
+          }
+        }
+
         // Original aspect ratio is kept in data attribute to maintain scaling.
         if (iframe.hasAttribute('data-width')) {
           width = iframe.getAttribute('data-width');
@@ -94,12 +107,35 @@
 
         // Get width and height of parent container.
         // @see http://stackoverflow.com/a/3971875
+
+        if (!window.getComputedStyle) {
+          window.getComputedStyle = function(el, pseudo) {
+            this.el = el;
+            this.getPropertyValue = function(prop) {
+              var re = /(\-([a-z]){1})/g;
+              if (prop == 'float') prop = 'styleFloat';
+              if (re.test(prop)) {
+                prop = prop.replace(re, function () {
+                  return arguments[2].toUpperCase();
+                });
+              }
+              return el.currentStyle[prop] ? el.currentStyle[prop] : null;
+            }
+            return this;
+          }
+        }
+
         if (window.getComputedStyle) {
           maxWidth = parseInt(window.getComputedStyle(iframe.parentElement, null).getPropertyValue('width'));
           maxHeight = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('height'));
+        } else if (iframe.currentStyle) {
+          maxWidth = iframe.parentElement.clientWidth;
+          maxHeight = document.body.clientHeight;
+          console.log(maxWidth + ' ' + maxHeight + ', ' + iframe.currentStyle.margin);
         } else {
           maxWidth = iframe.parentElement.offsetWidth;
           maxHeight = document.body.clientHeight;
+          console.log(maxWidth + ' ' + maxHeight);
         }
 
         if (width != maxWidth) {
@@ -117,7 +153,6 @@
         if (needsUpdate) {
           iframe.setAttribute('width', maxWidth);
           iframe.setAttribute('height', maxHeight);
-
           // Reset width and height to match scaled video.
           width *= ratio;
           height *= ratio;
@@ -145,7 +180,9 @@
       'gfycat.com/ifr/',
       'liveleak.com/ll_embed',
       'media.myspace.com',
-      'archive.org/embed'
+      'archive.org/embed',
+      'w.soundcloud.com/player',
+      'channel9.msdn.com'
     ],
     // object[data*="//www.flickr.com/apps/video"]
     object: [

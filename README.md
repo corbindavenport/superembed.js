@@ -10,13 +10,14 @@ I created SuperEmbed to fix all my issues with existing solutions, including (bu
 * Works without external libraries like JQuery
 * Responsive videos maintain their original aspect ratio
 * Responsive layout can be forced or blocked with classes applied to the embed code
-* Extremely tiny, the minified version is only 2 KB
+* Extremely tiny, the minified version is only 3 KB
 
 **Supported Services**
 
-Embeded videos from the following sites are supported:
+SuperEmbed can automatically detect and resize embedded content from these sites: 
 * YouTube
 * Vimeo
+* SoundCloud
 * Kickstarter
 * CollegeHumor
 * Hulu
@@ -29,6 +30,7 @@ Embeded videos from the following sites are supported:
 * Facebook
 * Gfycat
 * LiveLeak
+* MSDN Channel 9
 * MySpace
 * Archive.org
 
@@ -67,24 +69,8 @@ And finally, you can force a 1:1 aspect ratio by adding the `.superembed-square`
 
 ---------------------------------------------------------
 
-__New in SuperEmbed.js 3.0:__
-* Improved performance and cleaner code
-* Added support for Facebook, Gfycat, LiveLeak, MySpace, and Archive.org embeds
-
-__New in SuperEmbed.js 2.3:__
-* Now uses getComputedStyle to calculate width and height on supported browsers
-
-__New in SuperEmbed.js 2.2:__
-* Fixes to avoid conflict with other libraries
-
-__New in SuperEmbed.js 2.1:__
-* Now optionally uses JQuery for detecting page load and page resize, if JQuery is loaded before SuperEmbed
-
-__New in SuperEmbed.js 2.0:__
-* Almost completely re-written, resizing is now handled by JS instead of CSS
-* Now videos maintain their original aspect ratio when resized, no more letterboxing
-* Minimum Internet Explorer version dropped to IE 9
-* The `.superembed-square` class now applies a 1:1 ratio, instead of a 4:3 ratio
+__New in SuperEmbed.js 3.1:__
+* Added support for SoundCloud and MSDN Channel 9 embeds
 
 ---------------------------------------------------------
 
